@@ -8,10 +8,20 @@ public class GameManager : MonoBehaviour
 {
     [SerializeField] private Text scoreText;
     private int _scoreToDisplay = 0;
-    
+    private int _totalScore = 0;
+
     private void Awake()
     {
         DestructibleObjects.OnBlockDestroyed += OnOnBlockDestroyed;
+        DestructibleObjects.OnBlockCreated += OnOnBlockCreated;
+        print(_totalScore);
+    }
+
+    
+    // Это событие не работает 
+    private void OnOnBlockCreated(int scoreForBlock)
+    {
+        _totalScore += scoreForBlock;
     }
 
     private void OnOnBlockDestroyed(int scoreForBlock)
