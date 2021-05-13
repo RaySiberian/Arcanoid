@@ -13,6 +13,7 @@ public class Pad : MonoBehaviour
         Vector3 padPosition = posInWorld;
         padPosition.y = transform.position.y;
         padPosition.z = transform.position.z;
+        padPosition.x = Mathf.Clamp(padPosition.x, -6.3f, 6.3f);
         
         transform.position = padPosition;
     }

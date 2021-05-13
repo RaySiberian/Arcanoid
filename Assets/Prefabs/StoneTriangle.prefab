@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7640556653741343250}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.78, y: 1.6, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -96,12 +96,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   durability: 2
+  scoreToAdd: 2
   sprites:
   - {fileID: 21300000, guid: 00f4d727d0a64ec448eb18f5252ddf7c, type: 3}
   - {fileID: 21300000, guid: a951da627d99d7c43b3be986d687a648, type: 3}
   - {fileID: 21300000, guid: d16df9ccc46251e4caaa4a2ce0bbd3b5, type: 3}
   isUnBreakable: 0
-  scoreToAdd: 2
+  isInvisible: 0
 --- !u!60 &7640556653741343249
 PolygonCollider2D:
   m_ObjectHideFlags: 0

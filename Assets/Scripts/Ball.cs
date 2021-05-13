@@ -10,13 +10,13 @@ public class Ball : MonoBehaviour
     [SerializeField] private int health;
     [SerializeField] private Sprite[] sprites;
 
+    private bool _isHacked;
     private bool _isStarted;
     private Rigidbody2D _rb;
     
     void Start()
     {
         _rb = GetComponent<Rigidbody2D>();
-        
         
         // Почему нельзя выключить РБ?
         // gameObject.GetComponent<Ball>().enabled = false;
@@ -34,10 +34,22 @@ public class Ball : MonoBehaviour
             transform.position = padPosition;
         }
         
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !_isStarted)
         {
             BallStart();
         }
+
+        if (Input.GetKeyDown(KeyCode.F) && !_isHacked)
+        {
+            Hack();
+        }
+    }
+
+    private void Hack()
+    {
+        _isHacked = true;
+        health++;
+        gameObject.GetComponent<SpriteRenderer>().sprite = sprites[health - 1]; 
     }
 
     private void BallStart()

@@ -16,8 +16,6 @@ public class DestructibleObjects : MonoBehaviour
     private int _spriteIndex = 0;
 
     public static event Action<int> OnBlockDestroyed;
-    
-    // Это событие не работает 
     public static event Action<int> OnBlockCreated;
 
     private void Start()
@@ -27,17 +25,9 @@ public class DestructibleObjects : MonoBehaviour
             gameObject.GetComponent<SpriteRenderer>().enabled = false;
         }
 
-        // Даже полную проверку сделал
-        if (OnBlockCreated == null)
-        {
-            print(null);
-        }
-        else
-        {
-            OnBlockCreated.Invoke(scoreToAdd);
-        }
+        OnBlockCreated?.Invoke(scoreToAdd);
     }
-
+    
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player") && !isUnBreakable && !isInvisible)
@@ -53,16 +43,32 @@ public class DestructibleObjects : MonoBehaviour
         
     }
 
-    private void SelfDamage()
+    // Бул, чтоб закастылить принудительный выход из метода, а то нулы бросает
+    private bool SelfDamage()
     {
         durability--;
         if (durability <= 0)
         {
             OnBlockDestroyed?.Invoke(scoreToAdd);
             Destroy(gameObject);
+            return true;
         }
         
         _spriteIndex++;
         gameObject.GetComponent<SpriteRenderer>().sprite = sprites[_spriteIndex];
+        return false;
     }
+    
+    // private void SelfDamage()
+    // {
+    //     durability--;
+    //     if (durability <= 0)
+    //     {
+    //         OnBlockDestroyed?.Invoke(scoreToAdd);
+    //         Destroy(gameObject);
+    //     }
+    //     
+    //     _spriteIndex++;
+    //     gameObject.GetComponent<SpriteRenderer>().sprite = sprites[_spriteIndex];
+    // }
 }
